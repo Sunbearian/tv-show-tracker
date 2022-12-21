@@ -1,0 +1,10 @@
+.tv-show-item {
+    text-align: left;
+    display: flex;
+    justify-content: space-around;
+    border: 0.1em;
+    border-style: solid;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    padding: 2em;
+}
