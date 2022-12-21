@@ -31,9 +31,14 @@ export default function TvShowList() {
 	const [tvShowData, setTvShowData] =
 		useState<TvShowInputType[]>(initialTestData);
 
+	function addTvShow(showInput: TvShowInputType) {
+		setTvShowData([...tvShowData, showInput]);
+	}
+	console.log(tvShowData);
+
 	return (
 		<div>
-			<TvShowInput></TvShowInput>
+			<TvShowInput addTvShow={addTvShow}></TvShowInput>
 			{tvShowData.map((tvShow: TvShowInputType) => {
 				return <TvShowItem tvShow={tvShow}></TvShowItem>;
 			})}

@@ -13,13 +13,16 @@ type props = {
 export default function TvShowItem({ tvShow }: props) {
 	const { show_name, series_watched, total_Series, last_watched, rating } =
 		tvShow;
+
+	let convertlastWatched = last_watched.toDateString();
+
 	return (
 		<div>
 			<h3>{show_name}</h3>
 			<p>
 				Series: {series_watched} / {total_Series}
 			</p>
-			<p>Last Watched: {last_watched.toDateString()}</p>
+			<p>Last Watched: {convertlastWatched}</p>
 			<p>{rating} / 5</p>
 		</div>
 	);

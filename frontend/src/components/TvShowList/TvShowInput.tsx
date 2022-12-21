@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 type TvShowInputType = {
 	show_name: string;
@@ -8,7 +8,11 @@ type TvShowInputType = {
 	rating: number;
 };
 
-export default function TvShowInput() {
+type props = {
+	addTvShow: (input: TvShowInputType) => void;
+};
+
+export default function TvShowInput({ addTvShow }: props) {
 	const [input, setInput] = useState<TvShowInputType>();
 
 	const handleChange = (
@@ -19,11 +23,25 @@ export default function TvShowInput() {
 			[event.target.name]: event.currentTarget.value,
 		} as Pick<TvShowInputType, keyof TvShowInputType>);
 	};
-	{
-		console.log(input);
+
+	function onSubmit(e: React.FormEvent) {
+		e.preventDefault();
+		if (input !== undefined) {
+			addTvShow(input);
+			console.log(input);
+		}
 	}
+	function handleChangeDate(event: React.ChangeEvent<HTMLInputElement>) {
+		const convertedDate = new Date(event.target.value);
+
+		setInput({ ...input, last_watched: convertedDate } as Pick<
+			TvShowInputType,
+			keyof TvShowInputType
+		>);
+	}
+
 	return (
-		<form>
+		<form onSubmit={onSubmit}>
 			<input
 				type="text"
 				placeholder="TV Show"
@@ -46,7 +64,7 @@ export default function TvShowInput() {
 				required
 			></input>
 			<input
-				onChange={handleChange}
+				onChange={handleChangeDate}
 				type="date"
 				placeholder="Last watched"
 				name="last_watched"
