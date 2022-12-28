@@ -3,7 +3,7 @@ import React, { useState } from "react";
 type TvShowInputType = {
 	show_name: string;
 	series_watched: number;
-	total_Series: number;
+	total_series: number;
 	last_watched: Date;
 	rating: number;
 };
