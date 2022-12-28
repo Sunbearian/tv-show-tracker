@@ -1,7 +1,6 @@
 .App {
   text-align: center;
   width: 100%;
-  max-width: 980px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -10,10 +9,5 @@
 
 .App-header {
   
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* justify-content: center; */
   font-size: calc(10px + 2vmin);
 }
