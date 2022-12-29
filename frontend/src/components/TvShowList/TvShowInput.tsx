@@ -94,11 +94,21 @@ export default function TvShowInput({ addTvShow }: props) {
 				required
 				value={input?.rating}
 			>
-				<option placeholder="Rating">1</option>
-				<option placeholder="Rating">2</option>
-				<option placeholder="Rating">3</option>
-				<option placeholder="Rating">4</option>
-				<option placeholder="Rating">5</option>
+				<option value="1" placeholder="Rating">
+					1
+				</option>
+				<option value="2" placeholder="Rating">
+					2
+				</option>
+				<option value="3" placeholder="Rating">
+					3
+				</option>
+				<option value="4" placeholder="Rating">
+					4
+				</option>
+				<option value="5" placeholder="Rating">
+					5
+				</option>
 			</select>
 			<input type="submit"></input>
 		</form>
