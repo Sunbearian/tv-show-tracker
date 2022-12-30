@@ -1,3 +1,4 @@
+import AuthNav from "./AuthNav";
 import "./NavBar.css";
 
 export default function NavBar() {
@@ -6,10 +7,7 @@ export default function NavBar() {
 			<div className="NavBarItem">
 				<p className="title">TV Show Tracker</p>
 			</div>
-
-			<div>
-				<button className="NavBarItem">Log In</button>
-			</div>
+			<AuthNav></AuthNav>
 		</nav>
 	);
 }
