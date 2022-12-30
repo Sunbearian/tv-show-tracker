@@ -16,8 +16,6 @@ export default function TvShowItem({ tvShow }: props) {
 	const { show_name, series_watched, total_series, last_watched, rating } =
 		tvShow;
 
-	// let convertLastWatched = last_watched.toDateString();
-
 	return (
 		<div className="tv-show-item">
 			<h3>{show_name}</h3>
