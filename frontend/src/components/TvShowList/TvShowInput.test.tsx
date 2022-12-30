@@ -9,14 +9,13 @@ import TvShowInput from "./TvShowInput";
 //test that the inputs are correctly filled
 
 const addTvShow = jest.fn();
-describe("Testing that component renders correctly", () => {
-	test("TV Show input renders", () => {
-		render(<TvShowInput addTvShow={addTvShow}></TvShowInput>);
-		const tvShowName: HTMLInputElement = screen.getByPlaceholderText("TV Show");
 
-		userEvent.type(tvShowName, "Test Show");
-		expect(tvShowName.value).toBe("Test Show");
-	});
+test("TV Show input renders and captures input correctly", () => {
+	render(<TvShowInput addTvShow={addTvShow}></TvShowInput>);
+	const tvShowName: HTMLInputElement = screen.getByPlaceholderText("TV Show");
+
+	userEvent.type(tvShowName, "Test Show");
+	expect(tvShowName.value).toBe("Test Show");
 });
 
 test("Series watched input renders and captures input correctly", () => {
@@ -75,11 +74,35 @@ test("Rating input renders and captures input correctly", () => {
 		screen.getByRole("option", { name: "3" })
 	);
 
+	const option1: HTMLOptionElement = screen.getByRole("option", { name: "1" });
 	const option2: HTMLOptionElement = screen.getByRole("option", { name: "2" });
 	const option3: HTMLOptionElement = screen.getByRole("option", {
 		name: "3",
 	});
+	const option4: HTMLOptionElement = screen.getByRole("option", { name: "4" });
+	const option5: HTMLOptionElement = screen.getByRole("option", { name: "5" });
 
+	expect(option1.selected).toBe(false);
 	expect(option2.selected).toBe(false);
 	expect(option3.selected).toBe(true);
+	expect(option4.selected).toBe(false);
+	expect(option5.selected).toBe(false);
+});
+
+test("Rating input default is set to 1", () => {
+	render(<TvShowInput addTvShow={addTvShow}></TvShowInput>);
+
+	const option1: HTMLOptionElement = screen.getByRole("option", { name: "1" });
+	const option2: HTMLOptionElement = screen.getByRole("option", { name: "2" });
+	const option3: HTMLOptionElement = screen.getByRole("option", {
+		name: "3",
+	});
+	const option4: HTMLOptionElement = screen.getByRole("option", { name: "4" });
+	const option5: HTMLOptionElement = screen.getByRole("option", { name: "5" });
+
+	expect(option1.selected).toBe(true);
+	expect(option2.selected).toBe(false);
+	expect(option3.selected).toBe(false);
+	expect(option4.selected).toBe(false);
+	expect(option5.selected).toBe(false);
 });
