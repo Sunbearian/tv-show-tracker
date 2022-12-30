@@ -1,3 +1,5 @@
+import AuthNav from "./AuthNav";
+import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
 export default function NavBar() {
@@ -5,11 +7,10 @@ export default function NavBar() {
 		<nav className="NavBar">
 			<div className="NavBarItem">
 				<p className="title">TV Show Tracker</p>
+				<NavLink to="/profile">Profile </NavLink>
+				<NavLink to="/">TV Shows</NavLink>
 			</div>
-
-			<div>
-				<button className="NavBarItem">Log In</button>
-			</div>
+			<AuthNav></AuthNav>
 		</nav>
 	);
 }
