@@ -8,6 +8,7 @@ export default function NavBar() {
 			<div className="NavBarItem">
 				<p className="title">TV Show Tracker</p>
 				<NavLink to="/profile">Profile </NavLink>
+				<NavLink to="/">TV Shows</NavLink>
 			</div>
 			<AuthNav></AuthNav>
 		</nav>

@@ -2,30 +2,31 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import NavBar from "../NavBar/NavBar";
-import TvShowList from "../TvShowList/TvShowList";
-import { Profile } from "../../routes";
+import { Profile, TVShows, Main } from "../../routes";
 import RequireAuth from "../../auth/RequireAuth";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
+	const { isAuthenticated } = useAuth0();
 	return (
 		<div className="App">
 			<NavBar></NavBar>
-			<header className="App-header">
-				<h1>TV Show Tracker</h1>
-			</header>
-			<main>
-				<Routes>
-					<Route
-						path="/profile"
-						element={
-							<RequireAuth redirectTo="/">
-								<Profile />
-							</RequireAuth>
-						}
-					/>
-				</Routes>
-				<TvShowList></TvShowList>
-			</main>
+
+			<Routes>
+				<Route path="/" element={isAuthenticated ? <TVShows /> : <Main />} />
+				<Route
+					path="profile"
+					element={
+						<RequireAuth redirectTo="/">
+							<Profile />
+						</RequireAuth>
+					}
+				/>
+				<Route
+					path="tvshows"
+					element={<RequireAuth redirectTo="/"></RequireAuth>}
+				/>
+			</Routes>
 		</div>
 	);
 }

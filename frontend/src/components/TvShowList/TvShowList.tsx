@@ -34,7 +34,6 @@ export default function TvShowList() {
 	function addTvShow(showInput: TvShowInputType) {
 		setTvShowData([...tvShowData, showInput]);
 	}
-	console.log(tvShowData);
 
 	return (
 		<div>
