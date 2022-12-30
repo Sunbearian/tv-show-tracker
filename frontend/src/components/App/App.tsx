@@ -4,6 +4,7 @@ import "./App.css";
 import NavBar from "../NavBar/NavBar";
 import TvShowList from "../TvShowList/TvShowList";
 import { Profile } from "../../routes";
+import RequireAuth from "../../auth/RequireAuth";
 
 function App() {
 	return (
@@ -14,7 +15,14 @@ function App() {
 			</header>
 			<main>
 				<Routes>
-					<Route path="/profile" element={<Profile />} />
+					<Route
+						path="/profile"
+						element={
+							<RequireAuth redirectTo="/">
+								<Profile />
+							</RequireAuth>
+						}
+					/>
 				</Routes>
 				<TvShowList></TvShowList>
 			</main>
