@@ -21,7 +21,7 @@ export async function createUser(user) {
 				const errString = err.detail;
 				console.log(errString);
 			} else {
-				return data.rows[0];
+				return res.rows[0];
 			}
 		}
 	);

@@ -1,7 +1,6 @@
 import { pool } from "../db/index.js";
 
 export async function getUserTVShows(id) {
-	console.log(id, "this is the id");
 	const data = await pool.query("SELECT * FROM tvshows WHERE user_id = $1", [
 		id,
 	]);

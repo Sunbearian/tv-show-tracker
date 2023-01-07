@@ -31,21 +31,43 @@ type TvShowInputType = {
 export default function TvShowList() {
 	const url = process.env.REACT_APP_SERVER_URL;
 	const { user }: any = useAuth0();
-	const { sub } = user;
+	const { sub, email } = user;
 	const [tvShowData, setTvShowData] = useState<TvShowInputType[]>([]);
 
-	useEffect(() => {
-		async function getTVShows() {
-			const id = sub;
-			const request = await fetch(`${url}/api/tvshows/${id}`);
+	const id = sub;
+
+	async function getTVShows() {
+		const request = await fetch(`${url}/api/tvshows/${id}`);
+		const response = await request.json();
+
+		const userTVShowList = response.payload;
+
+		setTvShowData(userTVShowList);
+	}
+
+	async function checkUser() {
+		const request = await fetch(`${url}/api/users/${id}`);
+		const response = await request.json();
+
+		if (response.success === false) {
+			const request = await fetch(`${url}/api/users/`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ id: id, email: email }),
+			});
 			const response = await request.json();
 
-			const userTVShowList = response.payload;
-
-			setTvShowData(userTVShowList);
+			if (response.payload.user_id === id) {
+				getTVShows();
+			}
+		} else if (response.success === true) {
+			getTVShows();
 		}
-		getTVShows();
-	}, [sub, url]);
+	}
+
+	useEffect(() => {
+		checkUser();
+	}, []);
 
 	async function addTvShow(showInput: TvShowInputType) {
 		const newTVShow = {
@@ -56,7 +78,6 @@ export default function TvShowList() {
 			rating: Number(showInput.rating),
 			lastWatched: showInput.last_watched,
 		};
-		console.log(newTVShow, "this is new tvshow");
 
 		const request = await fetch(`${url}/api/tvshows`, {
 			method: "POST",
