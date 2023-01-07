@@ -1,0 +1,12 @@
+#form {
+   
+   text-align: left;
+   display: flex;
+   justify-content: space-around;
+   border: 0.1em;
+   border-style: solid;
+   margin: 1em 0em;
+   border-radius: 5px;
+   padding: 2em;
+
+}

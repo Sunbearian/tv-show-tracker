@@ -1,5 +1,5 @@
 import Profile from "./Profile";
 import TVShows from "./TVShows";
-import Main from "./Main";
+import LandingPage from "./LandingPage";
 
-export { Profile, TVShows, Main };
+export { Profile, TVShows, LandingPage };

@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import NavBar from "../NavBar/NavBar";
-import { Profile, TVShows, Main } from "../../routes";
+import { Profile, TVShows, LandingPage } from "../../routes";
 import RequireAuth from "../../auth/RequireAuth";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -13,7 +13,10 @@ function App() {
 			<NavBar></NavBar>
 
 			<Routes>
-				<Route path="/" element={isAuthenticated ? <TVShows /> : <Main />} />
+				<Route
+					path="/"
+					element={isAuthenticated ? <TVShows /> : <LandingPage />}
+				/>
 				<Route
 					path="profile"
 					element={
