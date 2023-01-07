@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TvShowItem from "./TvShowItem";
 import TvShowInput from "./TvShowInput";
+import { useAuth0 } from "@auth0/auth0-react";
 
 type TvShowInputType = {
 	show_name: string;
@@ -10,29 +11,64 @@ type TvShowInputType = {
 	rating: string;
 };
 
-const initialTestData: TvShowInputType[] = [
-	{
-		show_name: "Scrubs",
-		series_watched: "11",
-		total_series: "12",
-		last_watched: "2019-01-16",
-		rating: "5",
-	},
-	{
-		show_name: "How I Met Your Mother",
-		series_watched: "7",
-		total_series: "7",
-		last_watched: "2022-12-21",
-		rating: "5",
-	},
-];
+// const initialTestData: TvShowInputType[] = [
+// 	{
+// 		show_name: "Scrubs",
+// 		series_watched: "11",
+// 		total_series: "12",
+// 		last_watched: "2019-01-16",
+// 		rating: "5",
+// 	},
+// 	{
+// 		show_name: "How I Met Your Mother",
+// 		series_watched: "7",
+// 		total_series: "7",
+// 		last_watched: "2022-12-21",
+// 		rating: "5",
+// 	},
+// ];
 
 export default function TvShowList() {
-	const [tvShowData, setTvShowData] =
-		useState<TvShowInputType[]>(initialTestData);
+	const url = process.env.REACT_APP_SERVER_URL;
+	const { user }: any = useAuth0();
+	const { sub } = user;
+	const [tvShowData, setTvShowData] = useState<TvShowInputType[]>([]);
 
-	function addTvShow(showInput: TvShowInputType) {
-		setTvShowData([...tvShowData, showInput]);
+	useEffect(() => {
+		async function getTVShows() {
+			const id = sub;
+			const request = await fetch(`${url}/api/tvshows/${id}`);
+			const response = await request.json();
+
+			const userTVShowList = response.payload;
+
+			setTvShowData(userTVShowList);
+		}
+		getTVShows();
+	}, [sub, url]);
+
+	async function addTvShow(showInput: TvShowInputType) {
+		const newTVShow = {
+			userID: sub,
+			showName: showInput.show_name,
+			seriesWatched: Number(showInput.series_watched),
+			totalSeries: Number(showInput.total_series),
+			rating: Number(showInput.rating),
+			lastWatched: showInput.last_watched,
+		};
+		console.log(newTVShow, "this is new tvshow");
+
+		const request = await fetch(`${url}/api/tvshows`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(newTVShow),
+		});
+
+		const response = await request.json();
+
+		if (response.success === true) {
+			setTvShowData([...tvShowData, response.payload]);
+		}
 	}
 
 	return (

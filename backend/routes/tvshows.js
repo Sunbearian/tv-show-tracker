@@ -12,6 +12,7 @@ tvShowsRouter.get("/:id", async (req, res) => {
 
 tvShowsRouter.post("/", async (req, res) => {
 	const tvShow = req.body;
+	console.log(tvShow);
 	const newTVShow = await addTVShow(tvShow);
 
 	res.status(201).json({ success: true, payload: newTVShow });
