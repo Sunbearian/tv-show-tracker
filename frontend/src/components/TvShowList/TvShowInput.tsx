@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./TvShowInput.css";
 
 type TvShowInputType = {
 	show_name: string;
