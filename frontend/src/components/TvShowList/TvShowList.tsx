@@ -4,6 +4,7 @@ import TvShowInput from "./TvShowInput";
 import { useAuth0 } from "@auth0/auth0-react";
 
 type TvShowInputType = {
+	id_user_show: number;
 	show_name: string;
 	series_watched: string;
 	total_series: string;
@@ -48,6 +49,21 @@ export default function TvShowList() {
 		}
 	}
 
+	async function deleteShow(showID: number, index: number) {
+		const request = await fetch(`${url}/api/tvshows/${showID}`, {
+			method: "DELETE",
+			headers: { "Content-Type": "application/json" },
+		});
+		const response = await request.json();
+		if (response.success === true) {
+			let newTVShowData = [
+				...tvShowData.slice(0, index),
+				...tvShowData.slice(index + 1),
+			];
+			setTvShowData(newTVShowData);
+		}
+	}
+
 	useEffect(() => {
 		checkUser();
 		// eslint-disable-next-line
@@ -80,7 +96,15 @@ export default function TvShowList() {
 		<div>
 			<TvShowInput addTvShow={addTvShow}></TvShowInput>
 			{tvShowData.map((tvShow: TvShowInputType, index) => {
-				return <TvShowItem key={index} tvShow={tvShow}></TvShowItem>;
+				return (
+					<TvShowItem
+						key={index}
+						tvShow={tvShow}
+						deleteShow={() => {
+							deleteShow(tvShow.id_user_show, index);
+						}}
+					></TvShowItem>
+				);
 			})}
 		</div>
 	);

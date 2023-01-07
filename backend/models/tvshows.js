@@ -1,15 +1,15 @@
 import { pool } from "../db/index.js";
 
 export async function getUserTVShows(id) {
-	const data = await pool.query("SELECT * FROM tvshows WHERE user_id = $1", [
+	const request = await pool.query("SELECT * FROM tvshows WHERE user_id = $1", [
 		id,
 	]);
 
-	return data.rows;
+	return request.rows;
 }
 
 export async function addTVShow(tvShow) {
-	const data = await pool.query(
+	const request = await pool.query(
 		"INSERT INTO tvshows (user_id, show_name, series_watched, total_series, rating, last_watched) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
 		[
 			tvShow.userID,
@@ -20,5 +20,13 @@ export async function addTVShow(tvShow) {
 			tvShow.lastWatched,
 		]
 	);
-	return data.rows[0];
+	return request.rows[0];
+}
+
+export async function deleteShow(showId) {
+	const request = await pool.query(
+		"DELETE FROM tvshows WHERE id_user_show = $1 RETURNING *",
+		[showId]
+	);
+	return request.rows[0];
 }

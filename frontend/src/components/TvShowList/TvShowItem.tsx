@@ -1,6 +1,7 @@
 import "./TvShowItem.css";
 
 type TvShowInputType = {
+	id_user_show?: number;
 	show_name: string;
 	series_watched: string;
 	total_series: string;
@@ -10,11 +11,16 @@ type TvShowInputType = {
 
 type props = {
 	tvShow: TvShowInputType;
+	deleteShow: Function;
 };
 
-export default function TvShowItem({ tvShow }: props) {
+export default function TvShowItem({ tvShow, deleteShow }: props) {
 	const { show_name, series_watched, total_series, last_watched, rating } =
 		tvShow;
+
+	async function onClick() {
+		deleteShow();
+	}
 
 	return (
 		<div className="tv-show-item">
@@ -24,6 +30,7 @@ export default function TvShowItem({ tvShow }: props) {
 			</p>
 			<p>Last Watched: {last_watched}</p>
 			<p>{rating} / 5</p>
+			<button onClick={onClick}>🗑️</button>
 		</div>
 	);
 }

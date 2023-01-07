@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./TvShowInput.css";
 
 type TvShowInputType = {
+	id_user_show: number;
 	show_name: string;
 	series_watched: string;
 	total_series: string;
@@ -14,6 +15,7 @@ type props = {
 };
 
 const initialInput: TvShowInputType = {
+	id_user_show: 0,
 	show_name: "",
 	series_watched: "",
 	total_series: "",
