@@ -15,7 +15,14 @@ export async function checkUserID(id) {
 export async function createUser(user) {
 	const data = await pool.query(
 		"INSERT INTO users (user_id, email) VALUES ($1, $2) RETURNING *",
-		[user.id, user.email]
+		[user.id, user.email],
+		(err, res) => {
+			if (err) {
+				const errString = err.detail;
+				console.log(errString);
+			} else {
+				return data.rows[0];
+			}
+		}
 	);
-	return data.rows[0];
 }
