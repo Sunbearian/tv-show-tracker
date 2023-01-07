@@ -12,8 +12,8 @@ app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 
-app.use("api/users", usersRouter);
-app.use("api/tvshows", tvShowsRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/tvshows", tvShowsRouter);
 
 app.listen(PORT, () => {
 	console.log(`Listening on ${PORT}`);
