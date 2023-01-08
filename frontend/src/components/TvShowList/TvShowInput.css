@@ -2,11 +2,51 @@
    
    text-align: left;
    display: flex;
-   justify-content: space-around;
+   flex-direction: column;
    border: 0.1em;
    border-style: solid;
    margin: 1em 0em;
    border-radius: 5px;
-   padding: 2em;
+   padding: 1.2em;
+   /* flex-wrap: wrap; */
+      /* max-width: 350px; */
+      width: 95%;
 
+
+}
+
+.inputs {
+   display: flex;
+   flex-direction: column;
+   max-width: 100%;
+   gap: 0.4em;
+   flex-wrap: wrap;
+}
+.input-showName {
+max-width: 300px;
+margin-bottom: 5px;
+}
+
+.series {
+display: flex;
+gap: 5px;
+flex-wrap: wrap;
+}
+.series > input {
+   /* min-width:100px;  */
+   max-width: 100%;
+   
+}
+
+.inputs > select {
+margin-bottom: 5px;
+max-width: 300px;
+}
+.inputs > input {
+   max-width: 300px;
+}
+
+.tvshow-input-submit {
+   display: flex;
+   justify-content: center;
 }

@@ -18,6 +18,8 @@ export default function TvShowItem({ tvShow, deleteShow }: props) {
 	const { show_name, series_watched, total_series, last_watched, rating } =
 		tvShow;
 
+	const convertedDate = last_watched.slice(0, 10);
+
 	async function onClick() {
 		deleteShow();
 	}
@@ -25,11 +27,17 @@ export default function TvShowItem({ tvShow, deleteShow }: props) {
 	return (
 		<div className="tv-show-item">
 			<h3>{show_name}</h3>
-			<p>
-				Series: {series_watched} / {total_series}
-			</p>
-			<p>Last Watched: {last_watched}</p>
-			<p>{rating} / 5</p>
+			<div className="series-info">
+				<p>
+					Series: {series_watched} / {total_series}
+				</p>
+			</div>
+			<div className="date-rating">
+				<p>Last Watched: {convertedDate}</p>
+
+				<p>{rating} / 5</p>
+			</div>
+
 			<button onClick={onClick}>🗑️</button>
 		</div>
 	);
