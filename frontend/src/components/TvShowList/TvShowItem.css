@@ -7,9 +7,10 @@
     border-style: solid;
     margin: 1em 0em;
     border-radius: 5px;
-    padding: 2em;
+    padding: 1.2em;
     /* flex-wrap: wrap; */
-    max-width: 350px;
+    /* max-width: 350px; */
+    width: 95%;
 }
 
 /* .tv-show-item > h3 {

@@ -9,7 +9,8 @@
    border-radius: 5px;
    padding: 1.2em;
    /* flex-wrap: wrap; */
-      max-width: 350px;
+      /* max-width: 350px; */
+      width: 95%;
 
 
 }
