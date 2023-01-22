@@ -1,9 +1,10 @@
 import express, { Router } from "express";
+import jwtCheck from "../auth/check-jwt.js";
 const tvShowsRouter = express.Router();
 
 import { getUserTVShows, addTVShow, deleteShow } from "../models/tvshows.js";
 
-tvShowsRouter.get("/:id", async (req, res) => {
+tvShowsRouter.get("/:id", jwtCheck, async (req, res) => {
 	const id = req.params.id;
 	const userTVShows = await getUserTVShows(id);
 
