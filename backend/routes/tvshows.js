@@ -11,14 +11,14 @@ tvShowsRouter.get("/:id", jwtCheck, async (req, res) => {
 	res.status(200).json({ success: true, payload: userTVShows });
 });
 
-tvShowsRouter.post("/", async (req, res) => {
+tvShowsRouter.post("/", jwtCheck, async (req, res) => {
 	const tvShow = req.body;
 	const newTVShow = await addTVShow(tvShow);
 
 	res.status(201).json({ success: true, payload: newTVShow });
 });
 
-tvShowsRouter.delete("/:id", async (req, res) => {
+tvShowsRouter.delete("/:id", jwtCheck, async (req, res) => {
 	const showId = req.params.id;
 	const newTVShow = await deleteShow(showId);
 

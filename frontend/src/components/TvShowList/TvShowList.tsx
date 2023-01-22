@@ -23,7 +23,7 @@ export default function TvShowList() {
 	async function getTVShows() {
 		const token = await getAccessTokenSilently();
 		const request = await fetch(`${url}/api/tvshows/${id}`, {
-			headers: { Authorization: `Bearer ${token}` },
+			headers: { authorization: `Bearer ${token}` },
 		});
 		const response = await request.json();
 
@@ -33,13 +33,19 @@ export default function TvShowList() {
 	}
 
 	async function checkUser() {
-		const request = await fetch(`${url}/api/users/${id}`);
+		const token = await getAccessTokenSilently();
+		const request = await fetch(`${url}/api/users/${id}`, {
+			headers: { authorization: `Bearer ${token}` },
+		});
 		const response = await request.json();
 
 		if (response.success === false) {
 			const request = await fetch(`${url}/api/users/`, {
 				method: "POST",
-				headers: { "Content-Type": "application/json" },
+				headers: {
+					"Content-Type": "application/json",
+					authorization: `Bearer ${token}`,
+				},
 				body: JSON.stringify({ id: id, email: email }),
 			});
 			const response = await request.json();
@@ -53,9 +59,13 @@ export default function TvShowList() {
 	}
 
 	async function deleteShow(showID: number, index: number) {
+		const token = await getAccessTokenSilently();
 		const request = await fetch(`${url}/api/tvshows/${showID}`, {
 			method: "DELETE",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				authorization: `Bearer ${token}`,
+			},
 		});
 		const response = await request.json();
 		if (response.success === true) {
@@ -73,6 +83,7 @@ export default function TvShowList() {
 	}, []);
 
 	async function addTvShow(showInput: TvShowInputType) {
+		const token = await getAccessTokenSilently();
 		const newTVShow = {
 			userID: sub,
 			showName: showInput.show_name,
@@ -84,7 +95,10 @@ export default function TvShowList() {
 
 		const request = await fetch(`${url}/api/tvshows`, {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				authorization: `Bearer ${token}`,
+			},
 			body: JSON.stringify(newTVShow),
 		});
 
