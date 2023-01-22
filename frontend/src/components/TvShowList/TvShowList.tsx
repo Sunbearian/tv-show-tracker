@@ -14,14 +14,17 @@ type TvShowInputType = {
 
 export default function TvShowList() {
 	const url = process.env.REACT_APP_SERVER_URL;
-	const { user }: any = useAuth0();
+	const { user, getAccessTokenSilently }: any = useAuth0();
 	const { sub, email } = user;
 	const [tvShowData, setTvShowData] = useState<TvShowInputType[]>([]);
 
 	const id = sub;
 
 	async function getTVShows() {
-		const request = await fetch(`${url}/api/tvshows/${id}`);
+		const token = await getAccessTokenSilently();
+		const request = await fetch(`${url}/api/tvshows/${id}`, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
 		const response = await request.json();
 
 		const userTVShowList = response.payload;
