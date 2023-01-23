@@ -2,8 +2,8 @@
 
 /*CREATE TABLE users (
  user_id text PRIMARY KEY, 
-  first_name text NOT NULL,
-  last_name text NOT NULL,
+  first_name text,
+  last_name text,
    email text NOT NULL
  );
 
