@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-slate-800;
+  }
+}
 
 
-* {
+
+/* * {
    margin: 0;
    padding: 0;
 }
@@ -16,4 +22,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */

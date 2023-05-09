@@ -58,7 +58,7 @@ export default function TvShowInput({ addTvShow }: props) {
 		<form
 			id="form"
 			onSubmit={onSubmit}
-			className="rounded border border-solid border-white flex flex-col space-y-1 px-10 py-6 items-center max-w-xl m-4"
+			className="rounded border border-white flex flex-col space-y-1 px-10 py-6 items-center max-w-xl m-4"
 		>
 			<input
 				className="w-full"
