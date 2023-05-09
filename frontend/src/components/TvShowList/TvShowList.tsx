@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import TvShowItem from "./TvShowItem";
 import TvShowInput from "./TvShowInput";
 import { useAuth0 } from "@auth0/auth0-react";
-// import "./TvShowList.css";
 
 type TvShowInputType = {
 	id_user_show: number;

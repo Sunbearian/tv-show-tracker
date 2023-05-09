@@ -1,5 +1,3 @@
-import "./TvShowItem.css";
-
 type TvShowInputType = {
 	id_user_show?: number;
 	show_name: string;
@@ -25,20 +23,16 @@ export default function TvShowItem({ tvShow, deleteShow }: props) {
 	}
 
 	return (
-		<div className="tv-show-item">
+		<div className="rounded border border-solid border-white flex flex-col space-y-1 px-10 py-6 items-start max-w-xl m-4">
 			<h3>{show_name}</h3>
-			<div className="series-info">
-				<p>
-					Series: {series_watched} / {total_series}
-				</p>
-			</div>
-			<div className="date-rating">
-				<p>Last Watched: {convertedDate}</p>
-
-				<p>{rating} / 5</p>
-			</div>
-
-			<button onClick={onClick}>🗑️</button>
+			<p>
+				Series: {series_watched} / {total_series}
+			</p>
+			<p>Last Watched: {convertedDate}</p>
+			<p>{rating} / 5</p>
+			<button onClick={onClick} className="self-end">
+				🗑️
+			</button>
 		</div>
 	);
 }
