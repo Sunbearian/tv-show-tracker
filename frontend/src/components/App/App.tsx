@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import NavBar from "../NavBar/NavBar";
 import { TVShows, LandingPage } from "../../routes";
 import RequireAuth from "../../auth/RequireAuth";
