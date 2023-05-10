@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import NavBar from "../NavBar/NavBar";
 import { TVShows, LandingPage } from "../../routes";
 import RequireAuth from "../../auth/RequireAuth";
@@ -9,7 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 function App() {
 	const { isAuthenticated } = useAuth0();
 	return (
-		<div className="App">
+		<div className="flex flex-col items-center">
 			<NavBar></NavBar>
 
 			<Routes>

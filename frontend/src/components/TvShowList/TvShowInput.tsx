@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./TvShowInput.css";
 
 type TvShowInputType = {
 	id_user_show: number;
@@ -56,9 +55,13 @@ export default function TvShowInput({ addTvShow }: props) {
 	// }
 
 	return (
-		<form id="form" onSubmit={onSubmit}>
+		<form
+			id="form"
+			onSubmit={onSubmit}
+			className="rounded-xl border border-white flex flex-col px-10 py-6 items-center max-w-xl m-4"
+		>
 			<input
-				className="input-showName"
+				className="w-full rounded p-1 mb-1"
 				value={input?.show_name}
 				type="text"
 				placeholder="TV Show"
@@ -66,61 +69,62 @@ export default function TvShowInput({ addTvShow }: props) {
 				onChange={handleChange}
 				required
 			></input>
-			<div className="inputs">
-				<div className="series">
-					<input
-						value={input?.series_watched}
-						type="number"
-						placeholder="Series Watched"
-						name="series_watched"
-						onChange={handleChange}
-						required
-					></input>
-					<input
-						value={input?.total_series}
-						onChange={handleChange}
-						type="number"
-						placeholder="Total Series"
-						name="total_series"
-						required
-					></input>
-				</div>
-				<input
-					value={input?.last_watched}
-					onChange={handleChange}
-					type="date"
-					placeholder="Last watched"
-					name="last_watched"
-					required
-				></input>
-				<label htmlFor="rating">Rating?</label>
-				<select
-					onChange={handleChange}
-					id="rating"
-					name="rating"
-					required
-					value={input?.rating}
-				>
-					<option value="1" placeholder="Rating">
-						1
-					</option>
-					<option value="2" placeholder="Rating">
-						2
-					</option>
-					<option value="3" placeholder="Rating">
-						3
-					</option>
-					<option value="4" placeholder="Rating">
-						4
-					</option>
-					<option value="5" placeholder="Rating">
-						5
-					</option>
-				</select>
-			</div>
-			<div className="tvshow-input-submit">
-				<input type="submit"></input>
-			</div>
+			<input
+				className="w-full rounded p-1 mb-1"
+				value={input?.series_watched}
+				type="number"
+				placeholder="Series Watched"
+				name="series_watched"
+				onChange={handleChange}
+				required
+			></input>
+			<input
+				className="w-full rounded p-1 mb-1"
+				value={input?.total_series}
+				onChange={handleChange}
+				type="number"
+				placeholder="Total Series"
+				name="total_series"
+				required
+			></input>
+			<input
+				className="w-full rounded p-1 mb-1"
+				value={input?.last_watched}
+				onChange={handleChange}
+				type="date"
+				placeholder="Last watched"
+				name="last_watched"
+				required
+			></input>
+			<label className="text-white mb-1" htmlFor="rating">
+				Rating?
+			</label>
+			<select
+				className="w-full rounded p-1  mb-4"
+				onChange={handleChange}
+				id="rating"
+				name="rating"
+				required
+				value={input?.rating}
+			>
+				<option value="1" placeholder="Rating">
+					1
+				</option>
+				<option value="2" placeholder="Rating">
+					2
+				</option>
+				<option value="3" placeholder="Rating">
+					3
+				</option>
+				<option value="4" placeholder="Rating">
+					4
+				</option>
+				<option value="5" placeholder="Rating">
+					5
+				</option>
+			</select>
+
+			<input className="button m-0" type="submit" value="Add"></input>
 		</form>
 	);
 }

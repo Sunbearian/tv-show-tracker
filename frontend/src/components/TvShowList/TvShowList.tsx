@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import TvShowItem from "./TvShowItem";
 import TvShowInput from "./TvShowInput";
 import { useAuth0 } from "@auth0/auth0-react";
-import "./TvShowList.css";
+
 type TvShowInputType = {
 	id_user_show: number;
 	show_name: string;
@@ -110,7 +110,7 @@ export default function TvShowList() {
 	}
 
 	return (
-		<div className="TVShowList">
+		<div className="w-full max-w-lg">
 			<TvShowInput addTvShow={addTvShow}></TvShowInput>
 			{tvShowData.map((tvShow: TvShowInputType, index) => {
 				return (
