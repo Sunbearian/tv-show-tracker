@@ -23,7 +23,7 @@ export default function TvShowItem({ tvShow, deleteShow }: props) {
 	}
 
 	return (
-		<div className="rounded border border-solid border-white flex flex-col space-y-1 px-10 py-6 items-start max-w-xl m-4 text-white">
+		<div className="rounded-xl border border-solid border-white flex flex-col space-y-1 px-10 py-6 items-start max-w-xl m-4 text-white">
 			<h3 className="text-2xl font-bold ">{show_name}</h3>
 			<p>
 				Series: {series_watched} / {total_series}

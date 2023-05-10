@@ -58,10 +58,10 @@ export default function TvShowInput({ addTvShow }: props) {
 		<form
 			id="form"
 			onSubmit={onSubmit}
-			className="rounded border border-white flex flex-col space-y-1 px-10 py-6 items-center max-w-xl m-4"
+			className="rounded-xl border border-white flex flex-col px-10 py-6 items-center max-w-xl m-4"
 		>
 			<input
-				className="w-full"
+				className="w-full rounded p-1 mb-1"
 				value={input?.show_name}
 				type="text"
 				placeholder="TV Show"
@@ -70,7 +70,7 @@ export default function TvShowInput({ addTvShow }: props) {
 				required
 			></input>
 			<input
-				className="w-full"
+				className="w-full rounded p-1 mb-1"
 				value={input?.series_watched}
 				type="number"
 				placeholder="Series Watched"
@@ -79,7 +79,7 @@ export default function TvShowInput({ addTvShow }: props) {
 				required
 			></input>
 			<input
-				className="w-full"
+				className="w-full rounded p-1 mb-1"
 				value={input?.total_series}
 				onChange={handleChange}
 				type="number"
@@ -88,7 +88,7 @@ export default function TvShowInput({ addTvShow }: props) {
 				required
 			></input>
 			<input
-				className="w-full"
+				className="w-full rounded p-1 mb-1"
 				value={input?.last_watched}
 				onChange={handleChange}
 				type="date"
@@ -96,9 +96,11 @@ export default function TvShowInput({ addTvShow }: props) {
 				name="last_watched"
 				required
 			></input>
-			<label htmlFor="rating">Rating?</label>
+			<label className="text-white mb-1" htmlFor="rating">
+				Rating?
+			</label>
 			<select
-				className="w-full"
+				className="w-full rounded p-1  mb-4"
 				onChange={handleChange}
 				id="rating"
 				name="rating"
@@ -122,7 +124,7 @@ export default function TvShowInput({ addTvShow }: props) {
 				</option>
 			</select>
 
-			<input type="submit"></input>
+			<input className="button m-0" type="submit" value="Add"></input>
 		</form>
 	);
 }
