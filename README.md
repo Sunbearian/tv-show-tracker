@@ -41,3 +41,5 @@ I want to go back over the tests as I've discoverd MSW which means I can write m
 - Updated the site visually and worked more on the CSS to be good for mobile as well.
 
 - Worked on adding authorisation to the API end points on the backend server. Took a little while to workout how Auth0 handles tokens and getting them silently when the user logins. Battled through and got the end points locked down requiring a user to be authenticated to get access to the end points.
+
+- Wanted to learn to use Tailwind, installed and updated all the CSS using tailwind and removing all the css component files.
