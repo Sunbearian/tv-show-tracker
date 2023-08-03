@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { EditButton } from "./EditButton";
+
 type TvShowInputType = {
 	id_user_show?: number;
 	show_name: string;
@@ -16,10 +19,16 @@ export default function TvShowItem({ tvShow, deleteShow }: props) {
 	const { show_name, series_watched, total_series, last_watched, rating } =
 		tvShow;
 
+	const [isEditing, setIsEditing] = useState(false);
+
 	const convertedDate = last_watched.slice(0, 10);
 
 	async function onClick() {
 		deleteShow();
+	}
+
+	function toggleEdit() {
+		setIsEditing(!isEditing);
 	}
 
 	return (
@@ -30,12 +39,20 @@ export default function TvShowItem({ tvShow, deleteShow }: props) {
 			</p>
 			<p>Last Watched: {convertedDate}</p>
 			<p>{rating} / 5</p>
-			<button
-				onClick={onClick}
-				className="self-end bg-white p-2 rounded-full hover:bg-red-700"
-			>
-				🗑️
-			</button>
+			<div className="self-end">
+				<EditButton
+					isEditing={isEditing}
+					toggleEdit={toggleEdit}
+					className={"bg-white p-2 rounded-full hover:bg-red-700"}
+				></EditButton>
+
+				<button
+					onClick={onClick}
+					className="bg-white p-2 rounded-full hover:bg-red-700"
+				>
+					🗑️
+				</button>
+			</div>
 		</div>
 	);
 }
