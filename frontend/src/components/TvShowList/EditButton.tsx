@@ -1,21 +1,24 @@
 type props = {
 	isEditing: boolean;
 	toggleEdit: () => void;
+	editShow: () => void;
 	className: string;
 };
 
-export function EditButton({ isEditing, className, toggleEdit }: props) {
-	function onClick() {
-		toggleEdit();
-	}
+export function EditButton({
+	isEditing,
+	className,
+	toggleEdit,
+	editShow,
+}: props) {
 	return (
 		<>
 			{isEditing ? (
-				<button onClick={onClick} className={className}>
+				<button onClick={editShow} className={className}>
 					💾
 				</button>
 			) : (
-				<button onClick={onClick} className={className}>
+				<button onClick={toggleEdit} className={className}>
 					✏️
 				</button>
 			)}

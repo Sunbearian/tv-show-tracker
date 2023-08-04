@@ -17,8 +17,12 @@ export default function TvShowList() {
 	const { user, getAccessTokenSilently }: any = useAuth0();
 	const { sub, email } = user;
 	const [tvShowData, setTvShowData] = useState<TvShowInputType[]>([]);
-
+	const [isEditing, setIsEditing] = useState(false);
 	const id = sub;
+
+	function toggleEdit() {
+		setIsEditing(!isEditing);
+	}
 
 	async function getTVShows() {
 		const token = await getAccessTokenSilently();
@@ -77,6 +81,39 @@ export default function TvShowList() {
 		}
 	}
 
+	async function editShow(updatedShow: TvShowInputType) {
+		const token = await getAccessTokenSilently();
+		const editTVShow = {
+			showName: updatedShow.show_name,
+			seriesWatched: Number(updatedShow.series_watched),
+			totalSeries: Number(updatedShow.total_series),
+			rating: Number(updatedShow.rating),
+			lastWatched: updatedShow.last_watched,
+		};
+		const request = await fetch(
+			`${url}/api/tvshows/${updatedShow.id_user_show}`,
+			{
+				method: "PATCH",
+				headers: {
+					"Content-Type": "application/json",
+					authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify(editTVShow),
+			}
+		);
+		const response = await request.json();
+
+		if (response.success === true) {
+			let index = tvShowData.findIndex(
+				(show) => show.id_user_show === response.payload.id_user_show
+			);
+			let newTVShowData = [...tvShowData];
+			newTVShowData[index] = response.payload;
+			setTvShowData(newTVShowData);
+			toggleEdit();
+		}
+	}
+
 	useEffect(() => {
 		checkUser();
 		// eslint-disable-next-line
@@ -120,6 +157,9 @@ export default function TvShowList() {
 						deleteShow={() => {
 							deleteShow(tvShow.id_user_show, index);
 						}}
+						editShow={editShow}
+						toggleEdit={toggleEdit}
+						isEditing={isEditing}
 					></TvShowItem>
 				);
 			})}
