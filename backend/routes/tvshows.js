@@ -2,7 +2,12 @@ import express, { Router } from "express";
 import jwtCheck from "../auth/check-jwt.js";
 const tvShowsRouter = express.Router();
 
-import { getUserTVShows, addTVShow, deleteShow } from "../models/tvshows.js";
+import {
+	getUserTVShows,
+	addTVShow,
+	deleteShow,
+	editTVShow,
+} from "../models/tvshows.js";
 
 tvShowsRouter.get("/:id", jwtCheck, async (req, res) => {
 	const id = req.params.id;
@@ -23,6 +28,13 @@ tvShowsRouter.delete("/:id", jwtCheck, async (req, res) => {
 	const newTVShow = await deleteShow(showId);
 
 	res.status(201).json({ success: true, payload: newTVShow });
+});
+
+tvShowsRouter.put("/:id", async (req, res) => {
+	const showId = req.params.id;
+	const editedTVShow = req.body;
+	const updatedTVShow = await editTVShow(showId, editedTVShow);
+	res.status(200).json({ success: true, payload: updatedTVShow });
 });
 
 export default tvShowsRouter;
