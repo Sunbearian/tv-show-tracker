@@ -17,12 +17,7 @@ export default function TvShowList() {
 	const { user, getAccessTokenSilently }: any = useAuth0();
 	const { sub, email } = user;
 	const [tvShowData, setTvShowData] = useState<TvShowInputType[]>([]);
-	const [isEditing, setIsEditing] = useState(false);
 	const id = sub;
-
-	function toggleEdit() {
-		setIsEditing(!isEditing);
-	}
 
 	async function getTVShows() {
 		const token = await getAccessTokenSilently();
@@ -110,7 +105,7 @@ export default function TvShowList() {
 			let newTVShowData = [...tvShowData];
 			newTVShowData[index] = response.payload;
 			setTvShowData(newTVShowData);
-			toggleEdit();
+			// toggleEdit();
 		}
 	}
 
@@ -158,8 +153,6 @@ export default function TvShowList() {
 							deleteShow(tvShow.id_user_show, index);
 						}}
 						editShow={editShow}
-						toggleEdit={toggleEdit}
-						isEditing={isEditing}
 					></TvShowItem>
 				);
 			})}

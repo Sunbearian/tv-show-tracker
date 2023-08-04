@@ -14,21 +14,14 @@ type props = {
 	tvShow: TvShowInputType;
 	deleteShow: () => void;
 	editShow: Function;
-	toggleEdit: () => void;
-	isEditing: boolean;
 };
 
-export default function TvShowItem({
-	tvShow,
-	deleteShow,
-	editShow,
-	toggleEdit,
-	isEditing,
-}: props) {
-	const { show_name, series_watched, total_series, last_watched, rating } =
-		tvShow;
-
+export default function TvShowItem({ tvShow, deleteShow, editShow }: props) {
 	const [editedShow, setEditedShow] = useState(tvShow);
+	const [isEditing, setIsEditing] = useState(false);
+
+	const { show_name, series_watched, total_series, last_watched, rating } =
+		editedShow;
 
 	const convertedDate = last_watched.slice(0, 10);
 
@@ -41,6 +34,9 @@ export default function TvShowItem({
 		} as Pick<TvShowInputType, keyof TvShowInputType>);
 	};
 
+	function toggleEdit() {
+		setIsEditing(!isEditing);
+	}
 	async function deleteClick() {
 		deleteShow();
 	}
@@ -50,12 +46,12 @@ export default function TvShowItem({
 			{isEditing ? (
 				<input
 					className="bg-slate-800 text-2xl font-bold border rounded"
-					value={editedShow.show_name}
+					value={show_name}
 					onChange={handleChange}
 					name="show_name"
 				></input>
 			) : (
-				<h3 className="text-2xl font-bold ">{show_name}</h3>
+				<h3 className="text-2xl font-bold ">{editedShow.show_name}</h3>
 			)}
 			<p>
 				Series: {series_watched} / {total_series}

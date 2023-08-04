@@ -14,7 +14,13 @@ export function EditButton({
 	return (
 		<>
 			{isEditing ? (
-				<button onClick={editShow} className={className}>
+				<button
+					onClick={async () => {
+						await editShow();
+						toggleEdit();
+					}}
+					className={className}
+				>
 					💾
 				</button>
 			) : (
