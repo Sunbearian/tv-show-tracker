@@ -30,7 +30,7 @@ tvShowsRouter.delete("/:id", jwtCheck, async (req, res) => {
 	res.status(201).json({ success: true, payload: newTVShow });
 });
 
-tvShowsRouter.patch("/:id", async (req, res) => {
+tvShowsRouter.patch("/:id", jwtCheck, async (req, res) => {
 	const showId = req.params.id;
 	const editedTVShow = req.body;
 	const updatedTVShow = await editTVShow(showId, editedTVShow);
